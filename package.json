@@ -1,0 +1,21 @@
+{
+  "name": "ai-social-desktop",
+  "version": "1.0.0",
+  "main": "electron/main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm --prefix frontend run dev\" \"npm run electron-dev\"",
+    "electron-dev": "electron electron/main.js",
+    "build:frontend": "npm --prefix frontend run build",
+    "dist": "npm run build:frontend && electron-builder"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "electron": "^39.2.0",
+    "electron-builder": "^24.6.0",
+    "electron-rebuild": "^3.2.9"
+  },
+  "dependencies": {
+    "lowdb": "^7.0.1"
+  }
+}

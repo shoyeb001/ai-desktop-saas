@@ -1,0 +1,10 @@
+{
+  "settings": {
+    "geminiApiKey": "",
+    "openaiApiKey": "",
+    "anthropicApiKey": "",
+    "organizationName": "",
+    "email": "",
+    "password": ""
+  }
+}
