@@ -16,6 +16,8 @@
     "electron-rebuild": "^3.2.9"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "dotenv": "^17.2.3",
     "lowdb": "^7.0.1"
   }
 }

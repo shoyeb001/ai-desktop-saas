@@ -1,23 +1,23 @@
-import React from "react";
-import { Settings, User, Sparkles } from "lucide-react";
+import { Settings, User, Sparkles, Bell } from "lucide-react";
 
 export default function Header() {
     return (
-        <header className="flex items-center justify-between mb-4">
-            {/* Logo */}
-            <div className="flex items-center gap-2 text-xl font-semibold text-gray-800">
-                <Sparkles className="text-blue-600" size={28} />
-                <span>AI Social Desktop</span>
+        <header className="flex items-center justify-between pb-4 border-b border-gray-700">
+            <div className="flex items-center gap-2 text-lg font-medium">
+                <div className="w-5 h-5 bg-brandBlue rounded-full" />
+                <span>AI Tool</span>
             </div>
 
-            {/* Right icons */}
             <div className="flex items-center gap-4">
-                <Settings
-                    size={22}
-                    className="cursor-pointer text-gray-700 hover:text-black transition"
-                />
+                <button className="bg-darkCard p-2 rounded-lg hover:bg-gray-700 transition">
+                    <Settings size={18} />
+                </button>
 
-                <div className="w-9 h-9 rounded-full bg-gray-300 border border-gray-400 cursor-pointer" />
+                <button className="bg-darkCard p-2 rounded-lg hover:bg-gray-700 transition">
+                    <Bell size={18} />
+                </button>
+
+                <div className="w-9 h-9 rounded-full bg-gray-500" />
             </div>
         </header>
     );

@@ -54,36 +54,40 @@ const tools = [
 export default function HomePage() {
     const navigate = useNavigate();
     return (
-        <div className="w-full h-full p-6 bg-[#F5F7FE] text-gray-900">
+        <div className="w-full h-screen bg-darkBg text-darkText px-10 py-6">
             <Header />
+            <div className="mt-10">
+                <h1 className="text-3xl font-bold">
+                    Welcome back, what will you create today?
+                </h1>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 max-w-5xl">
 
-            {/* Tools Section */}
-            <div className="mt-8">
-
-                {/* Tools Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {tools.map((tool, index) => {
-                        const Icon = tool.icon;
-                        return (
-                            <div
-                                key={index}
-                                className={`rounded-2xl p-6 shadow-sm ${tool.color} hover:shadow-md transition-all cursor-pointer hover:-translate-y-1`}
-                                onClick={() => navigate(tool.link)}
-                            >
-                                <div className="flex items-center gap-3 mb-2">
-                                    <div className="p-2 bg-white rounded-xl shadow-sm">
-                                        <Icon size={20} className={tool.text} />
-                                    </div>
-                                    <h3 className={`text-lg font-semibold ${tool.text}`}>
-                                        {tool.title}
-                                    </h3>
-                                </div>
-
-                                <p className="text-sm text-gray-600">{tool.desc}</p>
-                            </div>
-                        );
-                    })}
-                </div>
+                {tools.map((tool, index) => (
+                    <div
+                        key={index}
+                        onClick={() => navigate(tool.link)}
+                        className="
+              bg-darkCard 
+              p-6 
+              rounded-2xl 
+              shadow 
+              hover:bg-[#243045] 
+              transition 
+              cursor-pointer
+            "
+                    >
+                        <div className="w-10 h-10 bg-[#1E3A8A] rounded-xl flex items-center justify-center mb-4">
+                            <tool.icon />
+                        </div>
+                        <h3 className="text-lg font-semibold mb-1">
+                            {tool.title}
+                        </h3>
+                        <p className="text-darkTextSecondary text-sm">
+                            {tool.desc}
+                        </p>
+                    </div>
+                ))}
             </div>
         </div>
     );
