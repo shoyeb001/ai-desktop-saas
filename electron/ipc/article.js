@@ -53,34 +53,16 @@ function buildPromptFromForm(form) {
   return `
 You are an expert SEO content writer.
 
-Write in a way that closely resembles human academic writing and reduces the likelihood of AI detection. The goal is to produce academic text that reflects how real content writers in HTML format only.
+Write in a way that closely resembles human writing and reduces the likelihood of AI detection. The goal is to produce academic text that reflects how real content writers in HTML format only.
 
 Do NOT include markdown, only valid HTML tags like <h1>, <p>, <ul>, <li>, <strong>.
 
-The final writing must reflect:
-- Human reasoning, small imperfections, and unique expression  
-- Varying sentence lengths and rhythm  
-- Occasional reflective thoughts, rhetorical questions, or mild emotions  
-- Personal-style insights or relatable examples  
-- Natural transitions, not AI-like connectors ("moreover", "furthermore" etc.)  
-- No generic summarizing phrases like “In conclusion”
-- Vary sentence length and syntactic structure throughout the text to avoid rhythmic uniformity
-- Avoid starting all sentences or paragraphs the same way; use a range of openings to create natural flow
-- Use hedging language to express intellectual caution, such as modal verbs and qualifiers, rather than absolute claims
-- Integrate theoretical framing and critical perspective, rather than merely summarising sources or claims
-- Situate ideas within ongoing scholarly conversations by referencing debates, tensions, or differing perspectives
-- Use precise, discipline-appropriate vocabulary that reflects conceptual clarity and field-specific knowledge
-- Avoid vague generalisations or filler phrases that contribute little to the argument
-- Vary the way citations are used and embed them naturally in the discussion, rather than mechanically attaching them to summary statements
-- Avoid repetitive patterns in grammar, punctuation, and connector words; maintain stylistic and rhetorical variation
-- Vary sentence length and structure, including the number and types of clauses. Incorporate both active and passive voice where appropriate
-- Ensure the writing demonstrates depth of understanding, positioning the writer as an active participant in the academic dialogue
-- Do not use em dashes or overuse words and expressions that are commonly identified as AI text giveaway
-- Write with personality but remain professional and high-quality.
+
 
 Avoid:
 - Repetition  
 - Overly formal or predictable structure  
+- uncommon words and phrases
 - Generic AI patterns  
 - Mechanical tone  
 - Perfectly balanced sentences
@@ -105,8 +87,6 @@ SEO + Content Requirements:
 - Article should be human readable, engaging, and not robotic.
 - Use keywords naturally, avoid stuffing.
 - If image generation is requested, also create a one-sentence image prompt for an AI image model.
-
-
 
 OUTPUT FORMAT (VERY IMPORTANT):
 Return ONLY a single JSON object with this exact shape, no markdown, no explanation:

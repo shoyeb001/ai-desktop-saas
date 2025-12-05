@@ -142,3 +142,32 @@
 	-ms-overflow-style: none; /* IE + Edge */
 	scrollbar-width: none; /* Firefox */
 }
+
+h2 {
+	font-size: 1.5rem;
+	font-weight: 600;
+	margin-bottom: 15px;
+	margin-top: 10px;
+	color: var(--darkText);
+}
+h3 {
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	color: var(--darkText);
+}
+h4 {
+	font-size: 1.1rem;
+	font-weight: 600;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	color: var(--darkText);
+}
+h5 {
+	font-size: 1rem;
+	font-weight: 600;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	color: var(--darkText);
+}

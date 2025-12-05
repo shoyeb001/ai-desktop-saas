@@ -1,17 +1,15 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Settings, MessageSquare } from "lucide-react";
+import { Settings, MessageSquare, Trash2 } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Link } from "react-router-dom";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Switch } from "@/components/ui/switch";
 import { ArticlePost } from "./components/articlepost";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ArticleSchema = z.object({
     topic: z.string().min(3, "Topic is required"),
@@ -44,7 +42,9 @@ const ArticleSchema = z.object({
 type ArticleForm = z.infer<typeof ArticleSchema>;
 
 export default function AIArticleWriter() {
-    const [postData, setPostData] = useState({});
+    const [postData, setPostData] = useState<any | null>();
+    const [history, setHistory] = useState<any[]>([]);
+
     const {
         register,
         handleSubmit,
@@ -75,18 +75,60 @@ export default function AIArticleWriter() {
 
         console.log("FINAL FORM DATA:", finalPayload);
         console.log("window.electronAPI:", window.electronAPI);
+        try {
+            const response = await window.electronAPI.generateArticle(finalPayload);
+            setPostData(response);
+            await window.electronAPI.saveArticleHistory({
+                topic: finalPayload.topic,
+                title: response.title,
+                response: response,
+            });
+            console.log("AI article response:", response);
 
-        const response = await window.electronAPI.generateArticle(finalPayload);
-        setPostData(response);
-        console.log("AI article response:", response);
+        } catch (error) {
+            console.error("Error generating article:", error);
+        }
+
     };
-    const history = [
-        "Future of AI",
-        "Marketing Copy",
-        "New Product Ideas",
-        "Quarterly Report",
-        "Blog Post Draft",
-    ];
+    async function handleHistoryClick(id: string) {
+        const data = await window.electronAPI.getHistoryItem(id);
+        setPostData(data.response);
+    }
+
+    useEffect(() => {
+
+        async function load() {
+            const h = await window.electronAPI.getHistory();
+            setHistory(h);
+        }
+        load();
+        window.electronAPI.onHistoryUpdate((entry) => {
+            setHistory((prev) => [entry, ...prev]); // Add to top
+        });
+        window.electronAPI.onHistoryDeleted((id) => {
+            setHistory((prev) => prev.filter((x) => x.id !== id));
+        });
+
+    }, []);
+
+    async function handleDelete(id: string) {
+        const confirmDelete = confirm("Delete this history item?");
+
+        if (!confirmDelete) return;
+
+        await window.electronAPI.deleteHistory(id);
+    }
+
+    function handleNewArticle() {
+        setPostData(null);
+        setValue("topic", "");
+        setValue("minLength", "");
+        setValue("maxLength", "");
+        setValue("writingStyle", "");
+        setValue("keywords", "");
+    }
+
+
 
     return (
         <div className="w-full h-screen bg-[#0f172a] text-white flex flex-col">
@@ -124,20 +166,16 @@ export default function AIArticleWriter() {
                     {/* HISTORY LIST SCROLL */}
                     <ScrollArea className="flex-1 mt-4 px-3">
                         <div className="space-y-1">
-                            {history.map((item, index) => (
+                            {history.map((item: any) => (
                                 <button
-                                    key={index}
-                                    className="
-                    w-full flex items-center gap-3
-                    px-4 py-3
-                    text-left
-                    rounded-lg
-                    hover:bg-[#1e293b]
-                    transition
-                  "
+                                    key={item.id}
+                                    onClick={() => handleHistoryClick(item.id)}
+                                    className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-[#1e293b] transition text-left"
                                 >
-                                    <MessageSquare className="text-gray-400" size={16} />
-                                    <span className="text-gray-300 text-sm">{item}</span>
+                                    <MessageSquare size={16} className="text-gray-400" />
+                                    <span className="text-gray-300 text-sm">{item.title}</span>
+
+                                    <Trash2 size={26} onClick={() => handleDelete(item.id)} />
                                 </button>
                             ))}
                         </div>
@@ -145,7 +183,7 @@ export default function AIArticleWriter() {
 
                     {/* NEW ARTICLE BUTTON */}
                     <div className="p-4">
-                        <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded-lg">
+                        <Button className="w-full bg-blue-600 hover:bg-blue-700 rounded-lg" onClick={handleNewArticle}>
                             + New Article
                         </Button>
                     </div>
@@ -251,7 +289,7 @@ export default function AIArticleWriter() {
                 </main>
 
                 {/* ================= RIGHT ARTICLE PREVIEW ================= */}
-                <ArticlePost postData={postData}/>
+                <ArticlePost postData={postData} />
             </div>
         </div>
     );

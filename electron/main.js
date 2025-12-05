@@ -6,6 +6,7 @@ import { fileURLToPath } from "url";
 // import IPC handlers (registers them)
 import "./ipc/setting.js";
 import "./ipc/article.js"; 
+import "./ipc/history.js"; 
 
 
 const __filename = fileURLToPath(import.meta.url);
