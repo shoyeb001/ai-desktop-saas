@@ -50,7 +50,6 @@ export default function AIArticleWriter() {
         handleSubmit,
         formState: { errors, isSubmitting },
         setValue,
-        watch,
     } = useForm<ArticleForm>({
         resolver: zodResolver(ArticleSchema),
 

@@ -34,7 +34,7 @@ function createWindow() {
   const isDev = !app.isPackaged;
 
   if (isDev) {
-    mainWindow.loadURL("http://localhost:5173");
+    mainWindow.loadURL("http://localhost:5173/");
     mainWindow.webContents.openDevTools();
   } else {
     mainWindow.loadFile(path.join(__dirname, "../frontend/dist/index.html"));

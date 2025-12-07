@@ -1,4 +1,4 @@
-import { Settings, User, Sparkles, Bell } from "lucide-react";
+import { Settings, Bell } from "lucide-react";
 
 export default function Header() {
     return (

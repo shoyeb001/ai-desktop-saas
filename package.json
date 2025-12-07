@@ -12,8 +12,32 @@
   "devDependencies": {
     "concurrently": "^9.2.1",
     "electron": "^39.2.0",
-    "electron-builder": "^24.6.0",
+    "electron-builder": "^24.13.3",
     "electron-rebuild": "^3.2.9"
+  },
+  "build": {
+    "appId": "com.yourcompany.aisocialdesktop",
+    "productName": "AISocialDesktop",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/**/*",
+      "frontend/dist/**/*",
+      "package.json"
+    ],
+    "extraMetadata": {
+      "main": "electron/main.js"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.productivity",
+      "icon": "icon.icns"
+    }
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
