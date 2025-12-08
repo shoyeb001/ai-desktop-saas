@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 import "./ipc/setting.js";
 import "./ipc/article.js"; 
 import "./ipc/history.js"; 
-
+import "./ipc/humanizer.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

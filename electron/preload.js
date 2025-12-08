@@ -17,5 +17,11 @@ contextBridge.exposeInMainWorld("electronAPI", {
   //SETTINGS API
   getSettings: () => ipcRenderer.invoke("settings:get"),
   updateSettings: (payload) => ipcRenderer.invoke("settings:update", payload),
-
+  //HUMANIZER API
+  humanizeText: (payload) => ipcRenderer.invoke("humanizer:process", payload),
+  getHumanizerHistory: () => ipcRenderer.invoke("humanizer:getAll"),
+  getHumanizerOne: (id) => ipcRenderer.invoke("humanizer:getOne", id),
+  deleteHumanizer: (id) => ipcRenderer.invoke("humanizer:delete", id),
+  onHumanizerUpdate: (cb) => ipcRenderer.on("humanizer:updated", (e, d) => cb(d)),
+  onHumanizerDelete: (cb) => ipcRenderer.on("humanizer:deleted", (e, id) => cb(id)),
 });

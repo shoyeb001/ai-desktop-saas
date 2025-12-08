@@ -47,7 +47,7 @@ const tools = [
         color: "bg-pink-100",
         text: "text-pink-700",
         icon: Type,
-        link: "/humanizer"
+        link: "/humanize"
     }
 ];
 
