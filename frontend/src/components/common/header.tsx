@@ -1,6 +1,8 @@
 import { Settings, Bell } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+    const navigate = useNavigate();
     return (
         <header className="flex items-center justify-between pb-4 border-b border-gray-700">
             <div className="flex items-center gap-2 text-lg font-medium">
@@ -9,7 +11,7 @@ export default function Header() {
             </div>
 
             <div className="flex items-center gap-4">
-                <button className="bg-darkCard p-2 rounded-lg hover:bg-gray-700 transition">
+                <button className="bg-darkCard p-2 rounded-lg hover:bg-gray-700 transition" onClick={() => navigate("/settings")}>
                     <Settings size={18} />
                 </button>
 

@@ -3,10 +3,6 @@ export { };
 declare global {
     interface Window {
         electronAPI: {
-            getSetting: (key: string) => Promise<any>;
-            setSetting: (key: string, value: any) => Promise<any>;
-            getAllSettings: () => Promise<any>;
-
             generateArticle: (payload: any) => Promise<{
                 title: string;
                 description: string;
@@ -20,6 +16,8 @@ declare global {
             onHistoryUpdate: (cb: (entry: any) => void) => void;
             deleteHistory: (id: string) => Promise<any>;
             onHistoryDeleted: (cb: (id: string) => void) => void;
+            getSettings: () => Promise<any>;
+            updateSettings: (payload: any) => Promise<any>;
 
         };
     }
