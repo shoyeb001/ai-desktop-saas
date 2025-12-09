@@ -16,7 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-import { MessageSquare, Trash2, Settings, Bell } from "lucide-react";
+import { MessageSquare, Trash2 } from "lucide-react";
 import Header from "@/components/common/header";
 
 const HumanizeSchema = z.object({
@@ -88,7 +88,9 @@ export default function HumanizerPage() {
     const onSubmit = async (values: HumanizeForm) => {
         setLoading(true);
         try {
+            console.log("Submitting:", values);
             const res = await window.electronAPI.humanizeText(values);
+            console.log(res);
             if ("result" in res) {
                 setOutput(res.result);
             }

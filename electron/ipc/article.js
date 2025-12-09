@@ -5,6 +5,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
+import { app } from "electron";
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -13,7 +14,9 @@ const __dirname = path.dirname(__filename);
 // ---- Load Gemini API key from settings.json or env ----
 function getGeminiApiKey() {
   try {
-    const settingsPath = path.join(__dirname, "../db/settings.json");
+    const userDataPath = app.getPath("userData");
+    const settingsPath = path.join(userDataPath, "settings.json");
+    // const settingsPath = path.join(__dirname, "../db/settings.json");
     if (fs.existsSync(settingsPath)) {
       const raw = fs.readFileSync(settingsPath, "utf-8");
       const json = JSON.parse(raw);

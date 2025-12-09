@@ -1,15 +1,15 @@
 {
-  "settings": {
-    "geminiApiKey": "",
-    "openaiApiKey": "",
-    "anthropicApiKey": "",
-    "organizationName": "",
-    "email": "",
-    "password": ""
-  },
-  "geminiApiKey": "AIzaSyB4cdWcIzxf5qklF7PRMzQqI3z7EBMyn_Y",
-  "firstName": "Sk",
-  "lastName": "Shoyeb",
-  "email": "shoyeb@gmail.com",
-  "password": "12345678"
+	"settings": {
+		"geminiApiKey": "",
+		"openaiApiKey": "",
+		"anthropicApiKey": "",
+		"organizationName": "",
+		"email": "",
+		"password": ""
+	},
+	"geminiApiKey": "",
+	"firstName": "Sk",
+	"lastName": "Shoyeb",
+	"email": "shoyeb@gmail.com",
+	"password": "12345678"
 }

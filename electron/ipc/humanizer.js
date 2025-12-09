@@ -5,17 +5,20 @@ import { JSONFile } from "lowdb/node";
 import path from "path";
 import { fileURLToPath } from "url";
 import { v4 as uuidv4 } from "uuid";
+import { app } from "electron";
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 // --- Load Settings DB for Gemini Key ---
-const settingsFile = path.join(__dirname, "../db/settings.json");
+const userDataPath = app.getPath("userData");
+const settingsFile = path.join(userDataPath, "settings.json");
+console.log("settingsFile:", settingsFile);
+// const settingsFile = path.join(__dirname, "../db/settings.json");
 const settingsDB = new Low(new JSONFile(settingsFile), {});
-await settingsDB.read();
 
 // --- Load Humanizer History DB ---
-const dbFile = path.join(__dirname, "../db/humanizer.json");
+const dbFile = path.join(userDataPath, "humanizer.json");
 const db = new Low(new JSONFile(dbFile), { history: [] });
 await db.read();
 db.data ||= { history: [] };
@@ -23,6 +26,8 @@ db.data ||= { history: [] };
 // --- Humanizer Processor ---
 ipcMain.handle("humanizer:process", async (event, payload) => {
   const { text, tone, style } = payload;
+  await db.read();
+  await settingsDB.read();
 
   if (!settingsDB.data.geminiApiKey)
     return { error: "Gemini API key not set in Settings." };

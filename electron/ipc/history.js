@@ -4,12 +4,14 @@ import { JSONFile } from "lowdb/node";
 import path from "path";
 import { fileURLToPath } from "url";
 import { v4 as uuidv4 } from "uuid";
-
+import {app} from "electron";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // DB PATH
-const dbFile = path.join(__dirname, "../db/history.json");
+// const dbFile = path.join(__dirname, "../db/history.json");
+const userDataPath = app.getPath("userData");
+const dbFile = path.join(userDataPath, "history.json");
 const adapter = new JSONFile(dbFile);
 const db = new Low(adapter, { articles: [] });
 
